@@ -1,13 +1,15 @@
-#pragma once
+#ifndef _BUSINESS_H_
+#define _BUSINESS_H_
+
 #include <Arduino.h>
 #include "config.h"
 
-void connectWiFi() {
-  Serial.print("Connecting to WiFi...");
-  WiFi.begin(WIFI_SSID, WIFI_PASS);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("Connected!");
+void test() {
+  Serial.println("Message from Server: TEST");
 }
+
+void mainBusiness() {
+  Serial.println("The program is running");
+}
+
+#endif

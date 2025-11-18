@@ -1,18 +1,11 @@
-#pragma once
+#ifndef _CONFIG_H_
+#define _CONFIG_H_
 
-#include <Servo.h>
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
-#include <OneWire.h>
-#include <DallasTemperature.h>
 #include <WiFi.h>
-#include <PubSubClient.h>
 
 #define WIFI_SSID "Wokwi-GUEST" // ae đổi lại thành tên và mật khẩu wifi cho đúng với nhà ae nhá
 #define WIFI_PASS ""
 extern WiFiClient espClient;
-extern PubSubClient mqttClient;
 
 const int PIR = 19;
 const int SERVO = 18;
@@ -31,7 +24,4 @@ const int SERVO_MAX = 90;   // Góc mở Servo khi detect PIR
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 
-extern Servo servo;
-extern Adafruit_SSD1306 oled;
-extern OneWire oneWire;
-extern DallasTemperature tempSensor;
+#endif
