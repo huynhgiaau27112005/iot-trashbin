@@ -17,8 +17,4 @@ const int ULTRA_SENSOR_ECHO = 16;
 const int TEMP_SENSOR = 32;
 const int BUTTON = 14;
 
-// OLED display width/height
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
-
 #endif
