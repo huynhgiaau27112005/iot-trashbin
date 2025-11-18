@@ -8,8 +8,8 @@ Nếu ae mới vừa cài extension, thời gian đợi máy tự cài đặt fo
 # CHẠY CHƯƠNG TRÌNH
 ## Bước 1. Build chương trình
 Có 2 cách để build chương trình:
-Cách 1: Vào diagram.json, ở góc trên bên phải màn hình, chọn Build
-Cách 2: Vào diagram.json, Ctrl + Shift + P --> Nhập "PlatformIO: Build"
+- Cách 1: Vào diagram.json, ở góc trên bên phải màn hình, chọn Build
+- Cách 2: Vào diagram.json, Ctrl + Shift + P --> Nhập "PlatformIO: Build"
 
 ## Bước 2. Chạy chương trình
 Vào diagram.json, ở góc trên bên phải màn hình, chọn Run Code
