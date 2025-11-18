@@ -3,7 +3,7 @@
 
 #include <WiFi.h>
 
-#define WIFI_SSID "Wokwi-GUEST" // ae đổi lại thành tên và mật khẩu wifi cho đúng với nhà ae nhá
+#define WIFI_SSID "Wokwi-GUEST"
 #define WIFI_PASS ""
 extern WiFiClient espClient;
 
