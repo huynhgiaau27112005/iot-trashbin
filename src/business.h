@@ -9,7 +9,7 @@ void test() {
 }
 
 void mainBusiness() {
-  Serial.println("The program is running");
+  Oled::display(String(UltraSensor::getTrashLevel()), 3);
 }
 
 #endif

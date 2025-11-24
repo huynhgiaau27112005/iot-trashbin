@@ -26,6 +26,7 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
     if (msg == "TEST") test();
     if (msg == "TEST") test();
     if (msg == "TEST") test();
+    if (msg == "Turn on light") test();
   }
 }
 
