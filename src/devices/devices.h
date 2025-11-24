@@ -5,7 +5,17 @@
 
 class Button {
 public:
+  
+  static long long startTime;
+  static long long endTime;
+  static bool isPress;
+  static bool isPressed5s;
+
+
   static void setup();
+  static void checkPress();
+  static bool isPressed();
+
 };
 
 class Led {
@@ -20,7 +30,8 @@ public:
 
 class Pir {
 public:
-  static void setup();
+static void setup();
+static bool isDetected();
 };
 
 class ServoMotor {

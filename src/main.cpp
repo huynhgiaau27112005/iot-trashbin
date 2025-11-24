@@ -3,7 +3,8 @@
 #include "devices/devices.h"
 #include "mqtt.h"
 #include "business.h"
-
+#include <stdlib.h>
+using namespace std;
 WiFiClient espClient;
 
 void connectWiFi() {
@@ -18,7 +19,6 @@ void connectWiFi() {
 
 void setup() {
   Serial.begin(115200);
-
   Pir::setup();
   ServoMotor::setup();
   Oled::setup();
@@ -30,7 +30,8 @@ void setup() {
   connectWiFi();
   connectMQTT();
 }
-
 void loop() {
+  Button::checkPress(); // Để bật trạng thái nhận sự kiện press button
+  Serial.println(Button::isPressed()); // Lấy trạng thái đã nhấn giữ nút hay chưa
   mainBusiness();
 }
