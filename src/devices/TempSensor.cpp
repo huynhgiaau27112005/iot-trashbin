@@ -1,13 +1,15 @@
 #include "devices.h"
-#include <Wire.h>
-#include <OneWire.h>
-#include <DallasTemperature.h>
 
-OneWire oneWire(TEMP_SENSOR);
-DallasTemperature tempSensor(&oneWire);
+OneWire TempSensor::oneWire = OneWire(TEMP_SENSOR);
+DallasTemperature TempSensor::tempSensor = DallasTemperature(&oneWire);
 
 void TempSensor::setup() {
   delay(2);
   tempSensor.begin();
   delay(20);
+}
+
+int TempSensor::getTemperatureC() {
+  tempSensor.requestTemperatures();
+  return (int)round(tempSensor.getTempCByIndex(0));
 }
