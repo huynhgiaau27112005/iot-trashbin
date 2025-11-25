@@ -26,6 +26,7 @@ public:
 class Led {
 public:
   static void setup();
+  static void switchLed(bool status);
 };
 
 class Oled {

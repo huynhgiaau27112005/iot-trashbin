@@ -31,7 +31,6 @@ void setup() {
   connectMQTT();
 }
 void loop() {
-  Button::checkPress(); // Để bật trạng thái nhận sự kiện press button
-  Serial.println(Button::isPressed()); // Lấy trạng thái đã nhấn giữ nút hay chưa
+
   mainBusiness();
 }
