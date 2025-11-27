@@ -3,13 +3,9 @@
 
 #include <Arduino.h>
 #include "config.h"
-
-void test() {
-  Serial.println("Message from Server: TEST");
-}
-
-void mainBusiness() {
-  Oled::display(String(UltraSensor::getTrashLevel()), 3);
-}
+#include "topics.h"
+#include "mqtt.h"
+#include "devices/devices.h"
+void mainBusiness();
 
 #endif

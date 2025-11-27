@@ -31,6 +31,6 @@ void setup() {
   connectMQTT();
 }
 void loop() {
-
   mainBusiness();
+  mqttClient.loop();
 }
