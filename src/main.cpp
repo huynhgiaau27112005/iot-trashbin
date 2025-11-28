@@ -31,6 +31,5 @@ void setup() {
   connectMQTT();
 }
 void loop() {
-
   mainBusiness();
 }

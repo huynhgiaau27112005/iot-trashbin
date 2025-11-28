@@ -47,6 +47,8 @@ static bool isDetected();
 class ServoMotor {
 public:
   static void setup();
+  static void close();
+  static void open();
 };
 
 class TempSensor {
