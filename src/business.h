@@ -3,23 +3,13 @@
 
 #include <Arduino.h>
 #include "config.h"
+#include "topics.h"
+#include "mqtt.h"
+#include "devices/devices.h"
 
-void test() {
-  Serial.println("Message from Server: TEST");
-}
+void mainBusiness();
 
 // Luồng nâng cao: INPUT -> OUTPUT: PIR -> SERVO
-void PIRtoServo() {
-  if (Pir::isDetected()) {
-    ServoMotor::open();
-  } else {
-    ServoMotor::close();
-  }
-}
-
-void mainBusiness() {
-  Oled::display(String(UltraSensor::getTrashLevel()), 3);
-  PIRtoServo();
-}
+void PIRtoServo();
 
 #endif
