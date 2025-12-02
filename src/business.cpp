@@ -17,3 +17,10 @@ void PIRtoServo() {
     ServoMotor::close();
   }
 }
+
+void ButtonToWeb() {
+  Button::checkPress();
+  if (Button::isPressed()) {
+    Serial.println("Pressed");
+  }
+}
