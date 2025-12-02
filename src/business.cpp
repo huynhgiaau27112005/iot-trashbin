@@ -1,13 +1,10 @@
 #include "business.h"
 void mainBusiness(){
-  Oled::display(String(UltraSensor::getTrashLevel()), 3);
+  Button::checkPress();
+  if (!Button::isPressed()) Oled::display(String(UltraSensor::getTrashLevel()), 3);
   PIRtoServo();
 
-  Button::checkPress();
-  if(Button::isPressed()){
-    mqttPublish(TOPIC_PUBLISH_BUTTON, "Nhin cai gi ma nhin");
-    
-  }
+  ButtonToWeb();
 }
 
 void PIRtoServo() {
@@ -18,9 +15,15 @@ void PIRtoServo() {
   }
 }
 
+bool malfunctionSent = false;
 void ButtonToWeb() {
-  Button::checkPress();
-  if (Button::isPressed()) {
-    Serial.println("Pressed");
+  if (Button::isPressed()){
+    Oled::display(String("Fault Signal Sent!"), 1);
+    if (!malfunctionSent) {
+      mqttPublish(TOPIC_PUBLISH_BUTTON, "device-malfunction");
+      malfunctionSent = true;
+    }
+  } else {
+    malfunctionSent = false;
   }
 }
