@@ -6,11 +6,8 @@ void mainBusiness(){
   if (!Button::isPressed()) Oled::display(String(UltraSensor::getTrashLevel()), 3);
   PIRtoServo();
 
-  Button::checkPress();
-  if(Button::isPressed()){
-    mqttPublish(TOPIC_PUBLISH_BUTTON, "Nhin cai gi ma nhin");
-    
-  }
+  ButtonToWeb();
+  
   long nowTrashLevel = UltraSensor::getTrashLevel();
   if( nowTrashLevel != preTrashLevel){
      char charLevel[4];
@@ -18,7 +15,6 @@ void mainBusiness(){
     mqttPublish(TOPIC_PUBLISH_ULTRA, charLevel);
     preTrashLevel = nowTrashLevel;
   }
-  ButtonToWeb();
 }
 
 void PIRtoServo() {

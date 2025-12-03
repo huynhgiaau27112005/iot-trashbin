@@ -2,11 +2,10 @@
 #include "topics.h"
 #include "devices/devices.h"
 
-
- const char* MQTT_BROKER = "broker.hivemq.com";
- const int MQTT_PORT = 1883;
- const char* MQTT_CLIENT_ID = "esp32_client_01";
- PubSubClient mqttClient(espClient);
+const char* MQTT_BROKER = "test.mosquitto.org"; //"broker.hivemq.com";
+const int MQTT_PORT = 1883;
+const char* MQTT_CLIENT_ID = "esp32_client_01";
+PubSubClient mqttClient(espClient);
 // --- Hàm MQTT callback khi nhận dữ liệu ---
 
 void mqttCallback(char* topic, byte* payload, unsigned int length) {
