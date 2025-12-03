@@ -9,7 +9,10 @@
 
 void mainBusiness();
 
-// Luồng nâng cao: INPUT -> OUTPUT: PIR -> SERVO
+// Luồng nâng cao: INPUT -> OUTPUT: PIR -> SERVO 
 void PIRtoServo();
+
+// Luồng cơ bản: INPUT -> WEB: Nhấn giữ nút 5 giây -> Nhận tín hiệu hư hỏng
+void ButtonToWeb();
 
 #endif

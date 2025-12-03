@@ -2,7 +2,8 @@
 
 long preTrashLevel = 100;
 void mainBusiness(){
-  Oled::display(String(UltraSensor::getTrashLevel()), 3);
+  Button::checkPress();
+  if (!Button::isPressed()) Oled::display(String(UltraSensor::getTrashLevel()), 3);
   PIRtoServo();
 
   Button::checkPress();
@@ -17,6 +18,7 @@ void mainBusiness(){
     mqttPublish(TOPIC_PUBLISH_ULTRA, charLevel);
     preTrashLevel = nowTrashLevel;
   }
+  ButtonToWeb();
 }
 
 void PIRtoServo() {
@@ -24,5 +26,18 @@ void PIRtoServo() {
     ServoMotor::open();
   } else {
     ServoMotor::close();
+  }
+}
+
+bool malfunctionSent = false;
+void ButtonToWeb() {
+  if (Button::isPressed()){
+    Oled::display(String("Fault Signal Sent!"), 1);
+    if (!malfunctionSent) {
+      mqttPublish(TOPIC_PUBLISH_BUTTON, "device-malfunction");
+      malfunctionSent = true;
+    }
+  } else {
+    malfunctionSent = false;
   }
 }
