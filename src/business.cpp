@@ -1,9 +1,13 @@
 #include "business.h"
+#include "devices/OledMode.h"
 
 long preTrashLevel = 100;
 void mainBusiness(){
   Button::checkPress();
-  if (!Button::isPressed()) Oled::display(String(UltraSensor::getTrashLevel()), 3);
+  if (!Button::isPressed()) {
+      OLEDManager::showTrash(UltraSensor::getTrashLevel());
+  }
+  
   PIRtoServo();
 
   ButtonToWeb();
