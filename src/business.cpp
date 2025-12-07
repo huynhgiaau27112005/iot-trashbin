@@ -1,20 +1,15 @@
 #include "business.h"
 
 long preTrashLevel = 100;
+int preTemp = 30;
 void mainBusiness(){
   Button::checkPress();
   if (!Button::isPressed()) Oled::display(String(UltraSensor::getTrashLevel()), 3);
   PIRtoServo();
 
   ButtonToWeb();
-  
-  long nowTrashLevel = UltraSensor::getTrashLevel();
-  if( nowTrashLevel != preTrashLevel){
-     char charLevel[4];
-    ltoa(nowTrashLevel, charLevel, 10);
-    mqttPublish(TOPIC_PUBLISH_ULTRA, charLevel);
-    preTrashLevel = nowTrashLevel;
-  }
+  UltraToWeb();
+  TempToWeb();
 }
 
 void PIRtoServo() {
@@ -35,5 +30,20 @@ void ButtonToWeb() {
     }
   } else {
     malfunctionSent = false;
+  }
+}
+void UltraToWeb(){
+  long nowTrashLevel = UltraSensor::getTrashLevel();
+  if( nowTrashLevel != preTrashLevel){
+    mqttPublish(TOPIC_PUBLISH_ULTRA, String(nowTrashLevel).c_str());
+    preTrashLevel = nowTrashLevel;
+    Serial.println(nowTrashLevel);
+  }
+}
+void TempToWeb(){
+  long nowTemp = TempSensor::getTemperatureC();
+  if( nowTemp != preTemp){
+    mqttPublish(TOPIC_PUBLISH_TEMP, String(nowTemp).c_str());
+    preTemp = nowTemp;
   }
 }
