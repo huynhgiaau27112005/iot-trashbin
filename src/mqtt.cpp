@@ -2,6 +2,7 @@
 #include "topics.h"
 #include "devices/devices.h"
 #include "devices/OledMode.h"
+#include <ArduinoJson.h>
 
 const char *MQTT_BROKER = "test.mosquitto.org"; //"broker.hivemq.com";
 const int MQTT_PORT = 1883;
@@ -17,24 +18,40 @@ void mqttCallback(char *topic, byte *payload, unsigned int length)
     for (int i = 0; i < length; i++)
         msg += (char)payload[i];
 
+    Serial.print("Message arrived [");
+    Serial.print(topic);
+    Serial.print("] ");
     Serial.println(msg);
 
-    if (String(topic) == TOPIC_SUBSCRIBE_OLED) {
-        // Nếu message = "RESET" → về chế độ TRASH
-        if (msg.equalsIgnoreCase("RESET")) {
+    if (String(topic) == TOPIC_SUBSCRIBE_OLED)
+    {
+        if (msg.equalsIgnoreCase("RESET"))
+        {
             OLEDManager::resetToTrash();
-            Serial.println("[OLED] Reset to TRASH mode");
+            return;
+        }
+        OLEDManager::showMQTT(msg);
+        return;
+    }
+
+    else if (String(topic) == TOPIC_SUBSCRIBE_LED)
+    {
+
+        StaticJsonDocument<200> doc;
+        DeserializationError error = deserializeJson(doc, msg);
+
+        if (error)
+        {
+            Serial.print(F("deserializeJson() failed: "));
+            Serial.println(error.f_str());
             return;
         }
 
-        // Ngược lại → hiển thị message từ MQTT
-        OLEDManager::showMQTT(msg);
-        Serial.println("[OLED] Showing MQTT message");
-        return;
-    }
-    else
-    {
-        Serial.println("Not Oled");
+        const char *mode = doc["mode"];
+        const char *start = doc["start"];
+        const char *end = doc["end"];
+
+        Led::updateConfig(String(mode), String(start), String(end));
     }
 }
 

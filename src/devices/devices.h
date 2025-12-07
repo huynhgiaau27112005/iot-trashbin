@@ -24,9 +24,20 @@ public:
 };
 
 class Led {
+private:
+  static String _mode;
+  static String _startTime;
+  static String _endTime;
+
 public:
   static void setup();
   static void switchLed(bool status);
+  
+  // Hàm mới để nhận config từ MQTT
+  static void updateConfig(String mode, String start, String end);
+  
+  // Hàm chạy trong loop để kiểm tra auto mode (nếu cần)
+  static void loopCheck(); 
 };
 
 class Oled {
