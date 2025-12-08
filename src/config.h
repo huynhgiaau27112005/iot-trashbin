@@ -7,6 +7,8 @@
 #define WIFI_PASS ""
 extern WiFiClient espClient;
 
+const int BIN_ID = 41653;
+
 const int PIR = 19;
 const int SERVO = 18;
 const int OLED_SCL = 21; 

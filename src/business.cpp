@@ -9,9 +9,9 @@ void mainBusiness(){
       OLEDManager::showTrash(UltraSensor::getTrashLevel());
   }
   
+  ButtonToWeb();
   PIRtoServo();
 
-  ButtonToWeb();
   UltraToWeb();
   TempToWeb();
 }
@@ -30,6 +30,7 @@ void ButtonToWeb() {
     Oled::display(String("Fault Signal Sent!"), 1);
     if (!malfunctionSent) {
       mqttPublish(TOPIC_PUBLISH_BUTTON, "device-malfunction");
+      Serial.print("Sent malfunction signal");
       malfunctionSent = true;
     }
   } else {
@@ -38,15 +39,14 @@ void ButtonToWeb() {
 }
 void UltraToWeb(){
   long nowTrashLevel = UltraSensor::getTrashLevel();
-  if( nowTrashLevel != preTrashLevel){
+  if(nowTrashLevel != preTrashLevel){
     mqttPublish(TOPIC_PUBLISH_ULTRA, String(nowTrashLevel).c_str());
     preTrashLevel = nowTrashLevel;
-    Serial.println(nowTrashLevel);
   }
 }
 void TempToWeb(){
   long nowTemp = TempSensor::getTemperatureC();
-  if( nowTemp != preTemp){
+  if(nowTemp != preTemp){
     mqttPublish(TOPIC_PUBLISH_TEMP, String(nowTemp).c_str());
     preTemp = nowTemp;
   }

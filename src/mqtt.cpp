@@ -82,6 +82,9 @@ void mqttPublish(const char *topic, const char *message)
 {
     if (mqttClient.connected())
     {
-        mqttClient.publish(topic, message);
+        String fullMessage = String(BIN_ID);
+        fullMessage += "/";
+        fullMessage += message;
+        mqttClient.publish(topic, fullMessage.c_str());
     }
 }

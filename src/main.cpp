@@ -31,6 +31,9 @@ void setup() {
   connectMQTT();
 }
 void loop() {
-  mainBusiness();
+  if (!mqttClient.connected()) {
+    connectMQTT();
+  }
   mqttClient.loop();
+  mainBusiness();
 }

@@ -32,9 +32,6 @@ void Oled::setup()
 
 void Oled::display(const String &message, int textSize)
 {
-
-    Serial.println(message);
-    Serial.println(Oled::current_message);
     if (message == Oled::current_message)
         return;
 
