@@ -4,9 +4,9 @@
 #include "devices/OledMode.h"
 #include <ArduinoJson.h>
 
-const char *MQTT_BROKER = "test.mosquitto.org"; //"broker.hivemq.com";
+const char *MQTT_BROKER = "broker.hivemq.com"; // "test.mosquitto.org"; //"broker.hivemq.com";
 const int MQTT_PORT = 1883;
-const char *MQTT_CLIENT_ID = "esp32_client_01";
+const char *MQTT_CLIENT_ID = "esp32_client_04";
 PubSubClient mqttClient(espClient);
 // --- Hàm MQTT callback khi nhận dữ liệu ---
 
@@ -82,7 +82,7 @@ void mqttPublish(const char *topic, const char *message)
 {
     if (mqttClient.connected())
     {
-        String fullMessage = String(BIN_ID);
+        String fullMessage = String(BIN_ID); // "41653/bin-full"
         fullMessage += "/";
         fullMessage += message;
         mqttClient.publish(topic, fullMessage.c_str());
