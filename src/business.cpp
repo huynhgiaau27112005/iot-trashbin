@@ -1,5 +1,4 @@
 #include "business.h"
-#include "devices/OledMode.h"
 
 long preTrashLevel = 100;
 int preTemp = 30;

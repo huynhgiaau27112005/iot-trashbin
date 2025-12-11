@@ -6,6 +6,7 @@
 #include "topics.h"
 #include "mqtt.h"
 #include "devices/devices.h"
+#include "devices/OledMode.h"
 
 void mainBusiness();
 

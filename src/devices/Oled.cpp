@@ -1,6 +1,7 @@
 #include "devices.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <sstream>
 
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
@@ -37,22 +38,30 @@ void Oled::display(const String &message, int textSize)
 
     oled.clearDisplay();
     oled.setTextSize(textSize);
-    oled.setTextColor(SSD1306_WHITE);
 
     // Căn giữa chiều cao và chiều ngang của văn bản (không chứa kí tự xuống dòng nhé)
     // Tính chiều rộng ký tự (mặc định font 6x8)
     int charWidth = 6 * textSize;
     int charHeight = 8 * textSize;
+    int maxCharactersInLine = oled.width() / charWidth;
 
-    int textWidth = message.length() * charWidth;
-    int textHeight = charHeight;
-
-    int x = (oled.width() - textWidth) / 2;
+    int textLines = ceil(1.0 * message.length() / maxCharactersInLine);
+    int textHeight = textLines * charHeight;
     int y = (oled.height() - textHeight) / 2;
 
-    oled.setCursor(x, y);
-    oled.println(message);
-    oled.display();
+    
+    for (size_t i = 0; i < message.length(); i += maxCharactersInLine) {
+        String lineMessage = message.substring(i, i + maxCharactersInLine);
+        
+        int textWidth = lineMessage.length() * charWidth;
+        int x = (oled.width() - textWidth) / 2; // căn giữa
+        
+        oled.setCursor(x, y);
+        oled.print(lineMessage);
+        
+        y += charHeight;
+    }
 
+    oled.display();
     Oled::current_message = message;
 }
