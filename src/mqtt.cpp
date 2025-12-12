@@ -4,7 +4,7 @@
 #include "devices/OledMode.h"
 #include <ArduinoJson.h>
 
-const char *MQTT_BROKER = "broker.hivemq.com"; // "test.mosquitto.org"; //"broker.hivemq.com";
+const char *MQTT_BROKER = "test.mosquitto.org"; // "test.mosquitto.org"; //"broker.hivemq.com";
 const int MQTT_PORT = 1883;
 const char *MQTT_CLIENT_ID = "esp32_client_04";
 PubSubClient mqttClient(espClient);
