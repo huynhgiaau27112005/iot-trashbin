@@ -3,7 +3,6 @@
 String Led::_mode = "manual";
 String Led::_startTime = "18:00";
 String Led::_endTime = "06:00";
-bool Led::_isOn = false;
 
 int Led::timeToMinutes(String timeStr) {
     int firstColon = timeStr.indexOf(':');
@@ -33,7 +32,7 @@ void Led::updateConfig(String mode, String start, String end, bool isOn) {
   Serial.print("Mode: "); Serial.println(_mode);
   Serial.print("Start: "); Serial.println(_startTime);
   Serial.print("End: "); Serial.println(_endTime);
-  Serial.print("Manual State: "); Serial.println(_isOn ? "ON" : "OFF");
+  Serial.print("Manual State: "); Serial.println(_i ? "ON" : "OFF");
 
   if (_mode == "manual") {
     Serial.println("[LED] Manual Control Triggered");

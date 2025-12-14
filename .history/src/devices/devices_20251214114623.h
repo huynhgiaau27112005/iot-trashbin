@@ -28,14 +28,13 @@ private:
   static String _mode;
   static String _startTime;
   static String _endTime;
-  static bool _isOn;
   static int timeToMinutes(String timeStr);
 public:
   static void setup();
   static void switchLed(bool status);
   
   // Hàm mới để nhận config từ MQTT
-  static void updateConfig(String mode, String start, String end, bool isOn);
+  static void updateConfig(String mode, String start, String end, boolean isOn);
   
   // Hàm chạy trong loop để kiểm tra auto mode (nếu cần)
   static void loopCheck(int currentHour, int currentMinute);

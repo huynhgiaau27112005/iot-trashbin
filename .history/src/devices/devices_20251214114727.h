@@ -28,7 +28,6 @@ private:
   static String _mode;
   static String _startTime;
   static String _endTime;
-  static bool _isOn;
   static int timeToMinutes(String timeStr);
 public:
   static void setup();

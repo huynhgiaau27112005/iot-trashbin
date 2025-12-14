@@ -42,8 +42,9 @@ void mqttCallback(char *topic, byte *payload, unsigned int length)
         const char *mode = doc["mode"];
         const char *start = doc["start"];
         const char *end = doc["end"];
+        bool isOn = doc["isOn"];
 
-        Led::updateConfig(String(mode), String(start), String(end));
+        Led::updateConfig(String(mode), String(start), String(end), isOn);
     }
 }
 

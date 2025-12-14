@@ -3,7 +3,6 @@
 String Led::_mode = "manual";
 String Led::_startTime = "18:00";
 String Led::_endTime = "06:00";
-bool Led::_isOn = false;
 
 int Led::timeToMinutes(String timeStr) {
     int firstColon = timeStr.indexOf(':');
