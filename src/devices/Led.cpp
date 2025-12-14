@@ -4,13 +4,23 @@ String Led::_mode = "manual";
 String Led::_startTime = "18:00";
 String Led::_endTime = "06:00";
 
+int Led::timeToMinutes(String timeStr) {
+    int firstColon = timeStr.indexOf(':');
+    if (firstColon == -1) return 0;
+    
+    int h = timeStr.substring(0, firstColon).toInt();
+    int m = timeStr.substring(firstColon + 1, firstColon + 3).toInt(); 
+    
+    return h * 60 + m;
+}
+
 void Led::setup() {
   pinMode(LED, OUTPUT);
+  digitalWrite(LED, LOW);
 }
 
 void Led::switchLed(bool status) {
-  if(status) digitalWrite(LED, HIGH);
-  else digitalWrite(LED, LOW);
+    digitalWrite(LED, status ? HIGH : LOW);
 }
 
 void Led::updateConfig(String mode, String start, String end) {
@@ -29,10 +39,25 @@ void Led::updateConfig(String mode, String start, String end) {
   }
 }
 
-void Led::loopCheck() {
-  if (_mode == "auto") {
-    // TODO: So sánh thời gian hiện tại (Real Time) với _startTime và _endTime
-    // Nếu nằm trong khoảng -> switchLed(true), ngược lại false.
-    // Lưu ý: Cần có module lấy giờ (NTP Client) mới chạy được chức năng này.
-  }
+void Led::loopCheck(int currentHour, int currentMinute) {
+    if (_mode == "auto") {
+        int currentTotalMins = currentHour * 60 + currentMinute;
+        int startTotalMins = timeToMinutes(_startTime);
+        int endTotalMins = timeToMinutes(_endTime);
+
+        bool shouldBeOn = false;
+
+        if (startTotalMins < endTotalMins) {
+            if (currentTotalMins >= startTotalMins && currentTotalMins < endTotalMins) {
+                shouldBeOn = true;
+            }
+        } else {
+            if (currentTotalMins >= startTotalMins || currentTotalMins < endTotalMins) {
+                shouldBeOn = true;
+            }
+        }
+
+        switchLed(shouldBeOn);
+    }
+    // Mode manual: User tự điều khiển (cần thêm logic MQTT nhận lệnh ON/OFF riêng nếu muốn điều khiển realtime)
 }

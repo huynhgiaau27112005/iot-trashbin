@@ -1,11 +1,17 @@
 #include <Arduino.h>
 #include "config.h"
 #include "devices/devices.h"
+#include <NTPClient.h> 
+#include <WiFiUdp.h>
 #include "mqtt.h"
 #include "business.h"
 #include <stdlib.h>
 using namespace std;
 WiFiClient espClient;
+
+// --- CẤU HÌNH NTP  ---
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", 25200, 60000);
 
 void connectWiFi() {
   Serial.print("Connecting to WiFi...");
@@ -28,12 +34,15 @@ void setup() {
   Button::setup();
 
   connectWiFi();
+  timeClient.begin();
   connectMQTT();
 }
 void loop() {
   if (!mqttClient.connected()) {
     connectMQTT();
   }
+  timeClient.update();
+  Led::loopCheck(timeClient.getHours(), timeClient.getMinutes());
   mqttClient.loop();
   mainBusiness();
 }

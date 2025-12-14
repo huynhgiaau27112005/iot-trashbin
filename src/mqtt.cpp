@@ -12,36 +12,28 @@ PubSubClient mqttClient(espClient);
 
 void mqttCallback(char *topic, byte *payload, unsigned int length)
 {
-
     String msg = "";
-    msg.reserve(length);
-    for (int i = 0; i < length; i++)
-        msg += (char)payload[i];
+    for (int i = 0; i < length; i++) msg += (char)payload[i];
 
-    Serial.print("Message arrived [");
-    Serial.print(topic);
-    Serial.print("] ");
-    Serial.println(msg);
+    Serial.print("Message arrived ["); Serial.print(topic); Serial.print("] "); Serial.println(msg);
 
     if (String(topic) == TOPIC_SUBSCRIBE_OLED)
     {
-        if (msg.equalsIgnoreCase("RESET"))
-        {
+        msg.replace("\"", ""); 
+        msg.trim();
+
+        if (msg.equalsIgnoreCase("RESET")) {
             OLEDManager::resetToTrash();
             return;
         }
         OLEDManager::showMQTT(msg);
-        return;
     }
-
     else if (String(topic) == TOPIC_SUBSCRIBE_LED)
     {
-
         StaticJsonDocument<200> doc;
         DeserializationError error = deserializeJson(doc, msg);
 
-        if (error)
-        {
+        if (error) {
             Serial.print(F("deserializeJson() failed: "));
             Serial.println(error.f_str());
             return;
