@@ -17,7 +17,7 @@ void Oled::setup()
 
     // Khởi tạo OLED
     if (!oled.begin(SSD1306_SWITCHCAPVCC, 0x3C))
-    { // 0x3C là địa chỉ phổ biến
+    {
         Serial.println(F("SSD1306 allocation failed"));
         for (;;)
             ; // Dừng nếu không tìm thấy OLED

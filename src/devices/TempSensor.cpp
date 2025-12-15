@@ -6,7 +6,7 @@ DallasTemperature TempSensor::tempSensor = DallasTemperature(&oneWire);
 void TempSensor::setup() {
   delay(2);
   tempSensor.begin();
-  tempSensor.setResolution(12);
+  tempSensor.setResolution(9); // 9 bit phân giải -> sai số tối đa 0.5 độ C
   delay(20);
 }
 
