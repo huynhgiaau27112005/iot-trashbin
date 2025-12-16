@@ -19,8 +19,7 @@ void Oled::setup()
     if (!oled.begin(SSD1306_SWITCHCAPVCC, 0x3C))
     {
         Serial.println(F("SSD1306 allocation failed"));
-        for (;;)
-            ; // Dừng nếu không tìm thấy OLED
+        while(true); // Dừng nếu không tìm thấy OLED
     }
 
     oled.clearDisplay();

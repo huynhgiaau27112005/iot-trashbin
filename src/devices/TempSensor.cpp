@@ -13,5 +13,8 @@ void TempSensor::setup() {
 int TempSensor::getTemperatureC() {
   tempSensor.requestTemperatures();
   float temp = tempSensor.getTempCByIndex(0);
-  return (temp <= 2048) ? round(temp) : round(temp - 4096);
+  return (temp <= 150) ? round(temp) : round(temp - 4096);
 }
+// -55 -> 125
+// > 0: 0 1 2 3 ...
+// < 0: ... 4094 4095 0

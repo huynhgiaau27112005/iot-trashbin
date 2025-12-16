@@ -18,8 +18,6 @@ void Button::checkPress(){
       if(Button::endTime - Button::startTime >= 5000){
         Button::isPressed5s = true;
       }
-    }else{
-      Button::isPress = false;
     }
   }
 
