@@ -1,6 +1,6 @@
 #include "devices.h"
 
-long UltraSensor::BIN_DEPTH_CM = 123;  //sqrt(100^2 + 73^2) = 123.8 cm
+long UltraSensor::BIN_DEPTH_CM = 115;   // sqrt(106^2 + 46^2) = 115.5 cm
 long UltraSensor::current_distance = 0;
 long UltraSensor::current_level = 0;
 double SOUND_SPEED = 0.034;  // Tốc độ âm thanh ~ 0.034 cm/us
