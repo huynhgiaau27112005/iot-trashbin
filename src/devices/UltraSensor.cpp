@@ -8,12 +8,12 @@ double SOUND_SPEED = 0.034;  // Tốc độ âm thanh ~ 0.034 cm/us
 void UltraSensor::setup() {
   pinMode(ULTRA_SENSOR_TRIG, OUTPUT);
   pinMode(ULTRA_SENSOR_ECHO, INPUT);
-  digitalWrite(ULTRA_SENSOR_TRIG, LOW);
-  delay(100);
 }
 
 long UltraSensor::measureDistanceCM() {
   // Gửi xung 10us lên TRIG
+  digitalWrite(ULTRA_SENSOR_TRIG, LOW);
+  delayMicroseconds(2);
   digitalWrite(ULTRA_SENSOR_TRIG, HIGH);
   delayMicroseconds(10);
   digitalWrite(ULTRA_SENSOR_TRIG, LOW);
