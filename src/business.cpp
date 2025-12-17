@@ -4,7 +4,7 @@ long preTrashLevel = 100;
 int preTemp = 30;
 void mainBusiness(){
   Button::checkPress();
-  if (!Button::isPressed()) {
+  if (!Button::isPressed5Seconds()) {
       OLEDManager::showTrash(UltraSensor::getTrashLevel());
   }
   
@@ -25,7 +25,7 @@ void PIRtoServo() {
 
 bool malfunctionSent = false;
 void ButtonToWeb() {
-  if (Button::isPressed()){
+  if (Button::isPressed5Seconds()){
     Oled::display(String("Fault Signal Sent!"), 1);
     if (!malfunctionSent) {
       mqttPublish(TOPIC_PUBLISH_BUTTON, "device-malfunction");

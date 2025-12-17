@@ -19,7 +19,7 @@ public:
 
   static void setup();
   static void checkPress();
-  static bool isPressed();
+  static bool isPressed5Seconds();
 
 };
 
