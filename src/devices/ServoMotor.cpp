@@ -7,8 +7,8 @@ const int SERVO_MAX = 75;   // Góc mở Servo khi detect PIR
 Servo servo;
 
 void ServoMotor::setup() {
-  servo.attach(SERVO);    // Gắn Servo vào chân SERVO
-  servo.write(SERVO_MIN); // Khởi tạo ở vị trí gập
+  servo.attach(SERVO);   
+  servo.write(SERVO_MIN); 
 }
 
 void ServoMotor::close() {
